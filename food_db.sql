@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2022 at 05:15 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Sep 25, 2024 at 05:41 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `admin` (
   `id` int(100) NOT NULL,
   `name` varchar(20) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
@@ -54,7 +54,16 @@ CREATE TABLE `cart` (
   `price` int(10) NOT NULL,
   `quantity` int(10) NOT NULL,
   `image` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `pid`, `name`, `price`, `quantity`, `image`) VALUES
+(4, 3, 1, 'Pizza', 20, 1, 'home-img-1.png'),
+(5, 3, 2, 'Fanta', 6, 2, 'fanta-removebg-preview.png'),
+(6, 4, 2, 'Fanta', 6, 1, 'fanta-removebg-preview.png');
 
 -- --------------------------------------------------------
 
@@ -69,7 +78,7 @@ CREATE TABLE `messages` (
   `email` varchar(100) NOT NULL,
   `number` varchar(12) NOT NULL,
   `message` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -89,7 +98,16 @@ CREATE TABLE `orders` (
   `total_price` int(100) NOT NULL,
   `placed_on` date NOT NULL DEFAULT current_timestamp(),
   `payment_status` varchar(20) NOT NULL DEFAULT 'pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`) VALUES
+(1, 1, 'Naruto', '12345678', 'naruto@gmail.com', 'cash on delivery', '325D, 12st, Toul Serngkae, Russey Koe, Phnom Penh', 'Pizza (20 x 1) - ', 20, '2024-08-26', 'pending'),
+(2, 2, 'Testing', '0123456789', 'testing@gmail.com', 'cash on delivery', '325D, 12st, Toul Serngkae, Russey Koe, Phnom Penh', 'Pizza (20 x 1) - ', 20, '2024-09-13', 'pending'),
+(3, 3, 'vaty', '0887788511', 'vaty@gmail.com', 'cash on delivery', '321, kjnbkj, iughlkjgk, lkjlk, lknnlknj', 'Pizza (20 x 1) - ', 20, '2024-09-13', 'completed');
 
 -- --------------------------------------------------------
 
@@ -103,7 +121,18 @@ CREATE TABLE `products` (
   `category` varchar(100) NOT NULL,
   `price` int(10) NOT NULL,
   `image` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `category`, `price`, `image`) VALUES
+(1, 'Pizza', 'fast food', 20, 'home-img-1.png'),
+(2, 'Fanta', 'drinks', 6, 'fanta-removebg-preview.png'),
+(3, 'Hamburger', 'fast food', 15, 'home-img-2.png'),
+(4, 'Coca-Cola', 'drinks', 5, 'coca-removebg-preview.png'),
+(5, 'Sprite', 'drinks', 2, 'sprite-removebg-preview.png');
 
 -- --------------------------------------------------------
 
@@ -118,7 +147,17 @@ CREATE TABLE `users` (
   `number` varchar(10) NOT NULL,
   `password` varchar(50) NOT NULL,
   `address` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `number`, `password`, `address`) VALUES
+(1, 'Naruto', 'naruto@gmail.com', '12345678', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '325D, 12st, Toul Serngkae, Russey Koe, Phnom Penh'),
+(2, 'Testing', 'testing@gmail.com', '0123456789', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '325D, 12st, Toul Serngkae, Russey Koe, Phnom Penh'),
+(3, 'vaty', 'vaty@gmail.com', '0887788511', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '321, kjnbkj, iughlkjgk, lkjlk, lknnlknj'),
+(4, 'user1', 'user1@gmail.com', '096512358', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '');
 
 --
 -- Indexes for dumped tables
@@ -174,7 +213,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -186,19 +225,19 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

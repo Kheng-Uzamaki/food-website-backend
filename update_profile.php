@@ -69,12 +69,15 @@ if(isset($_POST['submit'])){
          if($new_pass != $empty_pass){
             $update_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
             $update_pass->execute([$confirm_pass, $user_id]);
+            
             $message[] = 'password updated successfully!';
+            header('location:profile.php');
          }else{
             $message[] = 'please enter a new password!';
          }
       }
    }  
+   
 
 }
 
