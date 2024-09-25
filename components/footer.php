@@ -1,6 +1,6 @@
 <footer class="footer">
 
-   <section class="grid">
+   <!-- <section class="grid">
 
       <div class="box">
          <img src="images/email-icon.png" alt="">
@@ -28,12 +28,12 @@
          <a href="tel:1112223333">111-222-3333</a>
       </div>
 
-   </section>
+   </section> -->
 
-   <div class="credit">&copy; copyright @ <?= date('Y'); ?> by <span>kheng-Uchiha</span> | all rights reserved!</div>
+   <div class="credit">&copy; copyright @ <?= date('Y'); ?> by <span>Yummy-Yum</span> | all rights reserved!</div>
 
 </footer>
 
-<div class="loader">
+<!-- <div class="loader">
    <img src="images/loader.gif" alt="">
-</div>
+</div> -->
